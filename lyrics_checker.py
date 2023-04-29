@@ -50,7 +50,7 @@ def check_explicit(filename, word_list:list = None):
         wordList = []
         for word in word_list:
             wordList.append(caesar_cipher(word.upper()))
-        
+        # Makes the list a set to avoid redundant words
         explicit_words = set(explicit_words + wordList)
 
     # Read lyrics from file
@@ -103,5 +103,5 @@ if __name__ == "__main__":
     # User_Input = Song Name in lowercase
     Song_name = input("Song name : ")
     from lyric_scraper import *
-    main(Artist_name, Song_name)
+    scrape(Artist_name, Song_name)
     check_lyric(f'{Artist_name} {Song_name}','lyrics.txt', 'c')
