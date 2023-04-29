@@ -2,3 +2,5 @@ lyrics.txt
 demo.csv
 __pycache__/lyric_scraper.cpython-310.pyc
 __pycache__/read_csv.cpython-310.pyc
+lyrics
+__pycache__/lyrics_checker.cpython-310.pyc

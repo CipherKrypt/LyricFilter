@@ -47,8 +47,7 @@ def format_text(artist:str, song:str):
 def scrape(Artist_name:str, Song_name:str, output_file:str) -> None: 
     # Formats the given details into the url of form 'https://genius.com/artist-song-lyrics'
     lyrics_url = format_text(Artist_name,Song_name)
-    base_url = "https://genius.com/"+lyrics_url+"-lyrics" 
-    print("Scraped URL:", base_url)
+    base_url = "https://genius.com/"+lyrics_url+"-lyrics"
 
     result = requests.get(base_url) # Scrapes the result 
 
