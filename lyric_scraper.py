@@ -10,11 +10,20 @@ DATE  : 28-04-2023
 import requests
 from bs4 import BeautifulSoup
 
+def format_text(artist:str, song:str):
+    # Formats the given details into the form suitable for the URL
+    # Artist name should be in title case but surname/last name should be in lowercase
+    artist = artist[0].upper() + artist[1:].lower()
+    # Song name should be lowercase
+    song = song.lower()
+    # Artist name and song name should be joined by a hyphen
+    lyrics_url = artist+"-"+song
+    # All spaces should be replaced with a hyphen
+    return lyrics_url.replace(" ","-").rstrip('-')
 
 def main(Artist_name, Song_name):
     # Formats the given details into the url of form 'https://genius.com/artist-song-lyrics'
-    lyrics_url = Artist_name+"-"+Song_name
-    lyrics_url = lyrics_url.replace(' ', '-')
+    lyrics_url = format_text(Artist_name,Song_name)
     base_url = "https://genius.com/"+lyrics_url+"-lyrics" 
     print("Scraped URL:", base_url)
 
