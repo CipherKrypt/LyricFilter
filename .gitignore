@@ -1,2 +1,4 @@
-parsedhtml.txt
 lyrics.txt
+demo.csv
+__pycache__/lyric_scraper.cpython-310.pyc
+__pycache__/read_csv.cpython-310.pyc
