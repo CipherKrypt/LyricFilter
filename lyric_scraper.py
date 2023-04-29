@@ -44,7 +44,7 @@ def format_text(artist:str, song:str):
     # All spaces should be replaced with a hyphen
     return lyrics_url.replace(" ","-").rstrip('-')
 
-def main(Artist_name, Song_name):
+def scrape(Artist_name, Song_name):
     # Formats the given details into the url of form 'https://genius.com/artist-song-lyrics'
     lyrics_url = format_text(Artist_name,Song_name)
     base_url = "https://genius.com/"+lyrics_url+"-lyrics" 
@@ -68,4 +68,4 @@ if __name__ == "__main__":
     # User_Input = Song Name in lowercase
     Song_name = input("Song name : ")
 
-    main(Artist_name, Song_name)
+    scrape(Artist_name, Song_name)
