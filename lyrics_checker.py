@@ -71,15 +71,31 @@ def check_explicit(filename, word_list:list = None):
     return (found_explicit, hit)
 
 # Gets name of song and filename 
-def check_lyric(name, filename):
+def check_lyric(name, filename, mode = 'a'):
+    # Mode reader
+    show_red = False
+    show_green = False
+    if mode == 'a':
+        show_red = True
+        show_green = True
+    elif mode == 'e':
+        show_red = True
+    elif mode == 'c':
+        show_green = True
+    else:
+        show_red = True
+        show_green = True
+
+    # Encodes file using Caesar cipher
     process_lyrics(filename)
-    
+    # Checks for explicit words
     result = check_explicit(filename, explicit_words)
-    # Print result in terminal
-    if result[0]:
+    # Print result in terminal depending on mode
+    if result[0] and show_red:
         print(colored(f"{name} - Explicit   Hits: {result[1]}", "red"))
     else:
-        print(colored(f"{name} - Clear", "green"))
+        if show_green:
+            print(colored(f"{name} - Clean", "green")) 
 
 if __name__ == "__main__":
     # User_Input = Artist Name in Title case with the second name in lower case
@@ -88,10 +104,4 @@ if __name__ == "__main__":
     Song_name = input("Song name : ")
     from lyric_scraper import *
     main(Artist_name, Song_name)
-    process_lyrics('lyrics.txt')
-    
-
-
-
-
-
+    check_lyric(f'{Artist_name} {Song_name}','lyrics.txt', 'c')
