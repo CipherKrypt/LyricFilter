@@ -49,7 +49,7 @@ def check_explicit(filename, word_list:list = None):
     if word_list != None:
         wordList = []
         for word in word_list:
-            wordList.append(caesar_cipher(word))
+            wordList.append(caesar_cipher(word.upper()))
         
         explicit_words = set(explicit_words + wordList)
 
@@ -71,7 +71,7 @@ def check_explicit(filename, word_list:list = None):
     return (found_explicit, hit)
 
 # Gets name of song and filename 
-def check_lyric(name, filename, mode = 'a'):
+def check_lyric(name, filename, mode = 'a', explicit_words:list = None):
     # Mode reader
     show_red = False
     show_green = False
