@@ -18,6 +18,11 @@ def format_text(artist:str, song:str):
     song = song.lower()
     # Artist name and song name should be joined by a hyphen
     lyrics_url = artist+"-"+song
+
+    # Formats symbols to suitable format for URL
+    lyrics_url = lyrics_url.replace("&","and")
+    lyrics_url = lyrics_url.replace("'","")
+
     # All spaces should be replaced with a hyphen
     return lyrics_url.replace(" ","-").rstrip('-')
 
