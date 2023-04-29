@@ -31,7 +31,7 @@ def caesar_cipher(text, key=5):
 # Encodes lyrics with Caesar Cipher
 def process_lyrics(filename):
     # Read lyrics from file
-    with open(filename, "r", encoding="utf-8") as file:
+    with open(f'{filename}.txt', "r", encoding="utf-8") as file:
         lyrics = file.read()
         if len(lyrics) == 0:
             raise Exception("Lyrics not found")
@@ -72,6 +72,8 @@ def check_explicit(filename, word_list:list = None):
 
 # Gets name of song and filename 
 def check_lyric(name, filename, mode = 'a', explicit_words:list = None):
+    # white space to beautify output
+    whiteSpace = ' ' * (30 - len(name)) if len(name) < 30 else ' '
     # Mode reader
     show_red = False
     show_green = False
@@ -87,15 +89,18 @@ def check_lyric(name, filename, mode = 'a', explicit_words:list = None):
         show_green = True
 
     # Encodes file using Caesar cipher
-    process_lyrics(filename)
+    try:
+        process_lyrics(filename)
+    except:
+        print(colored(f"{name} - {whiteSpace}Lyrics not found", "yellow"))
     # Checks for explicit words
     result = check_explicit(filename, explicit_words)
     # Print result in terminal depending on mode
     if result[0] and show_red:
-        print(colored(f"{name} - Explicit   Hits: {result[1]}", "red"))
+        print(colored(f"{name} - {whiteSpace}Explicit   Hits: {result[1]}", "red"))
     else:
         if show_green:
-            print(colored(f"{name} - Clean", "green")) 
+            print(colored(f"{name} - {whiteSpace}Clean", "green")) 
 
 if __name__ == "__main__":
     # User_Input = Artist Name in Title case with the second name in lower case
@@ -103,5 +108,5 @@ if __name__ == "__main__":
     # User_Input = Song Name in lowercase
     Song_name = input("Song name : ")
     from lyric_scraper import *
-    scrape(Artist_name, Song_name)
-    check_lyric(f'{Artist_name} {Song_name}','lyrics.txt', 'c')
+    scrape(Artist_name, Song_name, 'lyrics')
+    check_lyric(f'{Artist_name} {Song_name}','lyrics', 'c')

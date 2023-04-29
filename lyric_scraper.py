@@ -60,7 +60,7 @@ def scrape(Artist_name:str, Song_name:str, output_file:str) -> None:
         for tags in lyric_tag:
             file.write(tags.text + "\n")
     file.close()
-    clean_up(f'{output_file}.txt')
+    clean_up(output_file)
 
 if __name__ == "__main__":
     # User_Input = Artist Name in Title case with the second name in lower case
