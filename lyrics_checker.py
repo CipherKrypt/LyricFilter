@@ -9,7 +9,10 @@ DATE  : 29-04-2023
 """
 import colorama
 from termcolor import colored
-
+import logging
+logger = logging.getLogger('lchecker')
+logger.setLevel(logging.WARNING)
+url = ''
 colorama.init()  # initialize colorama for colored output
 
 # Explicit word list is stored in cipher to protect reader from explicit content
@@ -91,16 +94,19 @@ def check_lyric(name, filename, mode = 'a', explicit_words:list = None):
     # Encodes file using Caesar cipher
     try:
         process_lyrics(filename)
+        # Checks for explicit words
+        result = check_explicit(filename, explicit_words)
+        # Print result in terminal depending on mode
+        if result[0] and show_red:
+            print(colored(f"{name} - {whiteSpace}Explicit   Hits: {result[1]}", "red"))
+        else:
+            if show_green:
+                print(colored(f"{name} - {whiteSpace}Clean", "green")) 
     except:
+        logger.warning(f'{name} not found: URL Accessed: {url}')
         print(colored(f"{name} - {whiteSpace}Lyrics not found", "yellow"))
-    # Checks for explicit words
-    result = check_explicit(filename, explicit_words)
-    # Print result in terminal depending on mode
-    if result[0] and show_red:
-        print(colored(f"{name} - {whiteSpace}Explicit   Hits: {result[1]}", "red"))
-    else:
-        if show_green:
-            print(colored(f"{name} - {whiteSpace}Clean", "green")) 
+        
+    
 
 if __name__ == "__main__":
     # User_Input = Artist Name in Title case with the second name in lower case
@@ -108,5 +114,5 @@ if __name__ == "__main__":
     # User_Input = Song Name in lowercase
     Song_name = input("Song name : ")
     from lyric_scraper import *
-    scrape(Artist_name, Song_name, 'lyrics')
+    url = scrape(Artist_name, Song_name, 'lyrics')
     check_lyric(f'{Artist_name} {Song_name}','lyrics', 'c')

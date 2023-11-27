@@ -3,6 +3,7 @@ from read_csv import read_csv
 from lyric_scraper import scrape
 from lyrics_checker import check_lyric
 
+
 def lyricFilter(filename):
     Songs = read_csv(filename, [])
     total = len(Songs)
